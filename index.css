@@ -1,0 +1,117 @@
+a {
+  color: red;
+  text-decoration:none;
+  font-size: 20px;
+  font-weight:bolder;
+}
+
+a:hover {
+  color: #4040a1;
+  text-decoration:none;
+}
+
+body{
+  text-align: center;
+  background-color:#d5f4e6;
+  font-family: "Times New Roman", Times, serif;
+  color: black;
+}
+h1{
+  text-align: center;
+  font-weight: bold;
+  font-size: 30px;
+}
+p{
+  position: relative;
+  top:-20px;
+}
+.button{
+  background-color:#1c87c9;
+  border: none;
+  color: white;
+  padding: 15px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 2px 2px;
+  cursor: pointer;
+}
+.button:hover{
+  background-color: #92a8d1;
+  text-decoration:none;
+}
+.category{
+  background-color:#d5f4e6 ;
+  width: 800px;
+  height: 350px;
+  padding: 50px;
+  margin: 5px;
+  position: relative;
+  left:100px;
+  top:-80px;
+  border: 5px solid #618685;
+  margin-top: 125px;
+  margin-bottom: 125px;
+  margin-right: 170px;
+  margin-left: 80px;
+}
+.game1{
+  position: relative;
+  text-align: left;
+  font-size: 50px;
+  top:-20px;
+  left:90px;
+  font-weight: bolder;
+}
+.hc{
+  position: relative;
+  left:-250px;
+  top:-10px;
+  cursor:auto;
+}
+.levels{
+  text-align: center;
+  cursor: pointer;
+  margin: 2px;
+  position: relative;
+  top:0px;
+  left: -260px;
+  color:red;
+}
+game2{
+  position: relative;
+  text-align: center;
+  top:-175px;
+  font-size: 50px;
+  font-weight: bolder;
+}
+.human{
+  position: relative;
+  top:40px;
+  left:-260px;
+}
+.hints{
+  position: relative;
+  top:45px;
+  left:-265px;
+  cursor: pointer;
+  color:red
+}
+.game3{
+   position: relative;
+   text-align: right;
+   top:-200px;
+   left:25px;
+   font-size: 40px;
+   font-weight: bolder;
+}
+.level{
+  text-align: right;
+  position: relative;
+  top:-180px;
+  left:-80px;
+  cursor: pointer;
+  color:red;
+  font-size: 30px;
+}

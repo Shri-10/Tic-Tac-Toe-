@@ -1,0 +1,102 @@
+
+.cell{
+  width: 60px;
+  height: 60px;
+  margin: 10px;
+  cursor: pointer;
+  color: salmon;
+  background-color:black;
+  display: flex;
+  line-height: 75px;
+  margin-top: 10px;
+}
+.cell:hover{
+  background-color:DimGrey;
+}
+.col-xs-4{
+  width:80px;
+  height:80px;
+  font-size: 70px;
+  float: left;
+  text-align: center;
+  color:Cornsilk;
+}
+#main{
+  min-height: 100%;
+  min-height: 100vh;
+  text-align: center;
+  display: flex;
+
+}
+
+body {
+  background-color: Cornsilk;
+  color: black;
+  font-family: "Times New Roman", Times, serif;
+  text-align: center;
+}
+h1{
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  font-family: "Times New Roman", Times, serif;
+}
+.endgame {
+  display: none;
+  width: 200px;
+  bottom: 1px;
+  background-color: DodgerBlue;
+  position: absolute;
+  left: 50%;
+  margin-left: -100px;
+  padding-top: 10px;
+  padding-bottom:10px;
+  text-align: center;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 2.5em;
+  border-radius: 5px;
+  border-color:solid black;
+  color: black;
+}
+
+#replayBtn {
+  padding: 6px 12px;
+  background-color: #228b22;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.5em;
+  transition: 0.3s;
+}
+
+#replayBtn:hover {
+  background-color: #006400;
+}
+.starting{
+  text-align: center;
+}
+#turn1{
+  padding: 6px 12px;
+  background-color: #228b22;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  text-align: center;
+}
+#turn1:hover{
+  background-color: #006400;
+}
+#turn2{
+  padding: 6px 12px;
+  background-color: #228b22;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  text-align: center;
+}
+#turn2:hover{
+    background-color: #006400;
+}
