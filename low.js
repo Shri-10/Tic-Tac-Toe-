@@ -1,4 +1,5 @@
 const tictactoeGame=new TicTacToeGame();
+//Starts the game
 tictactoeGame.start();
 function TicTacToeGame(){
   document.querySelector('.endgame').style.display = 'none';
@@ -19,17 +20,20 @@ function TicTacToeGame(){
   for(var i = 0; i < arr.length; i++) {
     arr[i].innerText = '';
     arr[i].style.removeProperty('background-color');}
+  //Declaring all the OOP's to constructor's function
   const board=new Board();
   const humanPlayer=new HumanPlayer(board);
   const computerPlayer=new ComputerPlayer(board);
   let turn=0;
   this.start=function(){
     const config={childList:true};
+    // To bserve all the moves made in the cells
     const observer=new MutationObserver(()=>takeTurn());
     board.positions.forEach((el)=>observer.observe(el,config));
     takeTurn();
     }
   function takeTurn(){
+    //Checks for win
     if (board.checkForWinner()==5){
       document.querySelector('.endgame').style.display = 'block';
       document.querySelector('.circle1').style.animation='react 4s linear infinite';
@@ -54,13 +58,14 @@ function TicTacToeGame(){
       document.querySelector('.endgame .text').innerText = 'You Won!';
       turn=0;
       return true ;
-    }
+    }// Checks for tie
     if (board.checkForTie(board)){
       document.querySelector('.endgame').style.display = 'block';
       document.querySelector('.endgame .text').innerText = 'Tie';
       turn=0;
       return true;
-    }if (turn<9){
+    }//Calls human and computer back to back to play thier roles
+    if (turn<9){
     if (turn%2===0){
       humanPlayer.takeTurn();
     }else if(turn%2!==0){
@@ -142,6 +147,7 @@ function checkIfWon(arr,g){
 }
 
 function Board(){
+  //Gets all the positions from the cell
   this.positions=Array.from(document.querySelectorAll('.col-xs-4'));
   this.checkForWinner=function(){
     let winner=false;
@@ -178,6 +184,7 @@ function Board(){
   }
   this.checkForTie=function(board){
     const arr=Array.from(document.querySelectorAll('.col-xs-4'));
+    //Gets all the available positions from the cells
     const availablePositions = board.positions.filter((p)=>p.innerText==='');
     if (availablePositions.length==0){
       for (i=0;i<arr.length;i++){
@@ -199,6 +206,7 @@ function HumanPlayer(board){
       const availablePositions = board.positions.filter((p)=>p.innerText==='');
       for (i=0;i<availablePositions.length;i++){
         if (availablePositions[i]===event.target){
+          // Places X at place where the user clicks
           event.target.innerText='X';
           board.positions.forEach(el=>el.removeEventListener('click',handleTurnTaken));
         }
@@ -210,10 +218,12 @@ function ComputerPlayer(board){
   this.takeTurn = function(){
     var array=[0,1,2,3,4,5,6,7,8];
     var array1=[0,1,2,3,4,5,6,7,8];
+    //Getting all the positions of X, O and available positions
     const arr=Array.from(document.querySelectorAll('.col-xs-4'));
     const availablePositions = board.positions.filter((p)=>p.innerText==='');
     const occupiedPositionsX = board.positions.filter((p)=>p.innerText==='X');
     const occupiedPositionsO = board.positions.filter((p)=>p.innerText==='O');
+    //Converting all positions to array forms
     for(i=0;i<arr.length;i++){
       for(j=0;j<occupiedPositionsX.length;j++){
         if (arr[i]==occupiedPositionsX[j]){
@@ -241,10 +251,12 @@ function ComputerPlayer(board){
         }
       }
     }
+    // Calling minimax function to make a move
     var move=minimax(array,2,"O")[0];
     array1[move].innerText='O';
   }
 }
+// Getting available positions in an array
 function pos(arr){
   var pos=[];
   for(v=0;v<arr.length;v++){
@@ -273,11 +285,13 @@ function minimax(array,depth,turn){
         const ii=i;
         const jj=j;
         const k=p[j];
+        //Checks for win
         if (checkIfWon(array,turn)==1){
           score=1;
         }else if (checkIfWon(array,opponent)==1){
           score=-1;
         }
+        //Checks for available positions for making further move
         else if (pos(array).length===0){
           score=0;
         }
@@ -298,6 +312,7 @@ function minimax(array,depth,turn){
       }
     }
   }
+  //Appends position nad best score to result for returning
   const result=[];
   result.splice(0,1,best_pos);
   result.splice(1,1,max_score);
