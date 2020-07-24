@@ -273,7 +273,6 @@ function pos(arr){
 }
 
 function minimax(array,turn,alpha,beta){
-  console.log("yess")
   var score;
   if (turn=="X"){
     var opponent="O";
