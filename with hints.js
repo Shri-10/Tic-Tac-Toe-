@@ -1,5 +1,6 @@
 const tictactoeGame=new TicTacToeGame();
 tictactoeGame.start();
+//Starts the game
 function TicTacToeGame(){
   document.querySelector('.endgame').style.display = 'none';
   document.querySelector('.message').style.display = 'none';
@@ -23,17 +24,21 @@ function TicTacToeGame(){
   for(var i = 0; i < arr.length; i++) {
     arr[i].innerText = '';
     arr[i].style.removeProperty('background-color');}
+  //Assigns all OOP's to constructor's function
   const board=new Board();
   const humanPlayer1=new HumanPlayer1(board);
   const humanPlayer2=new HumanPlayer2(board);
+  // For the first human player to start
   let turn=0;
   this.start=function(){
     const config={childList:true};
+    //To observe all moves in the cell
     const observer=new MutationObserver(()=>takeTurn());
     board.positions.forEach((el)=>observer.observe(el,config));
     takeTurn();
     }
   function takeTurn(){
+    //Checks for win
     if (board.checkForWinner()==5){
       document.querySelector('.message').style.display = 'none';
       document.querySelector('.endgame').style.display = 'block';
@@ -64,6 +69,7 @@ function TicTacToeGame(){
       turn=0;
       return true ;
     }
+    // Checks for tie
     else if (board.checkForTie(board)){
       document.querySelector('.message').style.display = 'none';
       document.querySelector('.endgame').style.display = 'block';
@@ -153,6 +159,7 @@ function checkIfWon(arr,g){
 }
 
 function Board(){
+  //To get all the positions from the cell
   this.positions=Array.from(document.querySelectorAll('.col-xs-4'));
   this.checkForWinner=function(){
     let winner=false;
@@ -190,6 +197,7 @@ function Board(){
   }
   this.checkForTie=function(board){
     const arr=Array.from(document.querySelectorAll('.col-xs-4'));
+    //To get the available positions in the cell
     const availablePositions = board.positions.filter((p)=>p.innerText==='');
     if (availablePositions.length==0){
       for (i=0;i<arr.length;i++){
@@ -207,9 +215,11 @@ function HumanPlayer1(board){
     var array=[0,1,2,3,4,5,6,7,8];
     var array1=[0,1,2,3,4,5,6,7,8];
     const arr=Array.from(document.querySelectorAll('.col-xs-4'));
+    //Getting all the positions of X, O and free spaces for the minimax algorithm to give hint
     const availablePositions = board.positions.filter((p)=>p.innerText==='');
     const occupiedPositionsX = board.positions.filter((p)=>p.innerText==='X');
     const occupiedPositionsO = board.positions.filter((p)=>p.innerText==='O');
+    //Converts all positions to array form
     for(i=0;i<arr.length;i++){
       for(j=0;j<occupiedPositionsX.length;j++){
         if (arr[i]==occupiedPositionsX[j]){
@@ -237,6 +247,7 @@ function HumanPlayer1(board){
         }
       }
     }
+    // Calls minimax function to give hint to player1.
     var move=minimax(array,"X")[0];
     blinkElement(array1[move],200,1500);
     document.querySelector('.message').style.display = 'block';
@@ -249,6 +260,7 @@ function HumanPlayer1(board){
       const availablePositions = board.positions.filter((p)=>p.innerText==='');
       for (i=0;i<availablePositions.length;i++){
         if (availablePositions[i]===event.target){
+          //Places the X at the position where player1 clicked
           event.target.innerText='X';
           board.positions.forEach(el=>el.removeEventListener('click',handleTurnTaken));
         }
@@ -260,10 +272,12 @@ function HumanPlayer2(board){
   this.takeTurn = function(){
     var array=[0,1,2,3,4,5,6,7,8];
     var array1=[0,1,2,3,4,5,6,7,8];
+    //Getting all the positions of X, O and free spaces for the minimax algorithm to give hint
     const arr=Array.from(document.querySelectorAll('.col-xs-4'));
     const availablePositions = board.positions.filter((p)=>p.innerText==='');
     const occupiedPositionsX = board.positions.filter((p)=>p.innerText==='X');
     const occupiedPositionsO = board.positions.filter((p)=>p.innerText==='O');
+    //Converts all positions to array form
     for(i=0;i<arr.length;i++){
       for(j=0;j<occupiedPositionsX.length;j++){
         if (arr[i]==occupiedPositionsX[j]){
@@ -291,7 +305,8 @@ function HumanPlayer2(board){
         }
       }
     }
-    var move=minimax(array,"O")[0];
+    //Calls the minimax with alpha-beta pruning function to give hint
+    var move=minimax1(array,"O")[0];
     blinkElement(array1[move],200,1500);
     document.querySelector('.message').style.display = 'block';
     document.querySelector('.message .text').innerText = 'TACs turn';
@@ -302,12 +317,14 @@ function HumanPlayer2(board){
     const availablePositions = board.positions.filter((p)=>p.innerText==='');
     for (i=0;i<availablePositions.length;i++){
       if (availablePositions[i]===event.target){
+        //Places O in the cell where the player2 clicks
         event.target.innerText='O';
         board.positions.forEach(el=>el.removeEventListener('click',handleTurnTaken));
       }
     }
   }
 }
+// To make that hint giving cell to blink
 function blinkElement(elm, interval, duration) {
 
    elm.style.visibility = (elm.style.visibility === "hidden" ? "visible" : "hidden");
@@ -319,6 +336,7 @@ function blinkElement(elm, interval, duration) {
    }
    return true;
 }
+// To get available positions from an array
 function pos(arr){
   var pos=[];
   for(v=0;v<arr.length;v++){
@@ -347,9 +365,11 @@ function minimax(array,turn){
         const ii=i;
         const jj=j;
         const k=p[j];
+        //Checks for win
         if (checkIfWon(array,turn)==1){
           score=1;
         }
+        //Checks for available positions to make further move
         else if (pos(array).length===0){
           score=0;
         }
@@ -364,6 +384,59 @@ function minimax(array,turn){
           max_score=score;
         }
       }
+    }
+  }
+  //Appends the position and best value to result for returning
+  const result=[];
+  result.splice(0,1,best_pos);
+  result.splice(1,1,max_score);
+  return result;
+ }
+function minimax1(array,turn,alpha,beta){
+  console.log("yess")
+  var score;
+  if (turn=="X"){
+    var opponent="O";
+    var max_score=-10;
+  }else{
+    opponent="X";
+    var max_score=-10;
+  }
+  var best_pos;
+  var p=pos(array);
+  var i; var j;
+  for(i=0;i<array.length;i++){
+    for(j=0;j<p.length;j++){
+      if (array[i]==p[j]){
+        array.splice(i,1,turn);
+        const ii=i;
+        const jj=j;
+        const k=p[j];
+        if (checkIfWon(array,turn)==1){
+          score=1;
+        }
+        else if (pos(array).length===0){
+          score=0;
+        }
+        else{
+          score=-minimax1(array,opponent,alpha,beta)[1];
+        }
+        i=ii;
+        j=jj;
+        array.splice(i,1,p[j]);
+        if (score>max_score){
+          best_pos=p[j];
+          max_score=score;
+          if (turn=="O"){
+            alpha=Math.max(alpha,max_score);
+          }else if (turn=="X"){
+            beta=Math.max(beta,max_score);
+          }
+        }
+      }
+    }// Checks if the minimizing player's score is less than maximizing player's and breaks the loop
+    if (beta<=alpha){
+      break;
     }
   }
   const result=[];
