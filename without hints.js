@@ -1,4 +1,5 @@
 const tictactoeGame=new TicTacToeGame();
+//Starts the function
 tictactoeGame.start();
 function TicTacToeGame(){
   document.querySelector('.endgame').style.display = 'none';
@@ -23,17 +24,21 @@ function TicTacToeGame(){
   for(var i = 0; i < arr.length; i++) {
     arr[i].innerText = '';
     arr[i].style.removeProperty('background-color');}
+  //Assigns all OOP's to constructor's function
   const board=new Board();
   const humanPlayer1=new HumanPlayer1(board);
   const humanPlayer2=new HumanPlayer2(board);
+  //Declaring turn for player1 to start first
   let turn=0;
   this.start=function(){
     const config={childList:true};
     const observer=new MutationObserver(()=>takeTurn());
+    //To observe all the moves made in the cell
     board.positions.forEach((el)=>observer.observe(el,config));
     takeTurn();
     }
   function takeTurn(){
+    //Checks for win
     if (board.checkForWinner()==5){
       document.querySelector('.message').style.display = 'none';
       document.querySelector('.endgame').style.display = 'block';
@@ -64,6 +69,7 @@ function TicTacToeGame(){
       turn=0;
       return true ;
     }
+    //Checks for tie
     else if (board.checkForTie(board)){
       document.querySelector('.message').style.display = 'none';
       document.querySelector('.endgame').style.display = 'block';
@@ -71,6 +77,7 @@ function TicTacToeGame(){
       turn=0;
       return true;
     }
+    //Calls players back to back to make moves in the cells
     if (turn<9){
     if (turn%2===0){
       humanPlayer1.takeTurn();
@@ -153,6 +160,7 @@ function checkIfWon(arr,g){
 }
 
 function Board(){
+  // Gets all the positions in the cells
   this.positions=Array.from(document.querySelectorAll('.col-xs-4'));
   this.checkForWinner=function(){
     let winner=false;
@@ -190,6 +198,7 @@ function Board(){
   }
   this.checkForTie=function(board){
     const arr=Array.from(document.querySelectorAll('.col-xs-4'));
+    //To get all the available positions in the cell
     const availablePositions = board.positions.filter((p)=>p.innerText==='');
     if (availablePositions.length==0){
       for (i=0;i<arr.length;i++){
@@ -214,6 +223,7 @@ function HumanPlayer1(board){
       const availablePositions = board.positions.filter((p)=>p.innerText==='');
       for (i=0;i<availablePositions.length;i++){
         if (availablePositions[i]===event.target){
+          //To place X in the appropriate cell where player1 clicks
           event.target.innerText='X';
           board.positions.forEach(el=>el.removeEventListener('click',handleTurnTaken));
         }
@@ -232,6 +242,7 @@ function HumanPlayer2(board){
     const availablePositions = board.positions.filter((p)=>p.innerText==='');
     for (i=0;i<availablePositions.length;i++){
       if (availablePositions[i]===event.target){
+        //To place O in the appropriate cell where player1 clicks
         event.target.innerText='O';
         board.positions.forEach(el=>el.removeEventListener('click',handleTurnTaken));
       }
