@@ -237,18 +237,11 @@ function HumanPlayer(board){
             }
           }
         }
-        var move=minimax(array,"O")[0];
+        var move=minimax(array,"O",-1,1)[0];
         array1[move].innerText='O';
       }
     }
 
-function ComputerPlayer1(board){
-  this.takeTurn = function(){
-    const availablePositions = board.positions.filter((p)=>p.innerText==='');
-    const move=Math.floor(Math.random()*availablePositions.length);
-    availablePositions[move].innerText='O';
-  }
-}
 function pos(arr){
   var pos=[];
   for(v=0;v<arr.length;v++){
@@ -259,15 +252,17 @@ function pos(arr){
   return pos;
 }
 
-function minimax(array,turn){
+function minimax(array,turn,alpha,beta){
+  console.log("yess")
   var score;
   if (turn=="X"){
     var opponent="O";
+    var max_score=-10;
   }else{
     opponent="X";
+    var max_score=-10;
   }
   var best_pos;
-  var max_score=-10;
   var p=pos(array);
   var i; var j;
   for(i=0;i<array.length;i++){
@@ -284,7 +279,7 @@ function minimax(array,turn){
           score=0;
         }
         else{
-          score=-minimax(array,opponent)[1];
+          score=-minimax(array,opponent,alpha,beta)[1];
         }
         i=ii;
         j=jj;
@@ -292,8 +287,15 @@ function minimax(array,turn){
         if (score>max_score){
           best_pos=p[j];
           max_score=score;
+          if (turn=="O"){
+            alpha=Math.max(alpha,max_score);
+          }else if (turn=="X"){
+            beta=Math.max(beta,max_score);
+          }
         }
       }
+    }if (beta<=alpha){
+      break;
     }
   }
   const result=[];
