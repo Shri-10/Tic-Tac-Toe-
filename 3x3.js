@@ -1,3 +1,4 @@
+alert("In this challenge round, the word JOKER appears and disappears randomly after each move. When it disappears other players are free to use JOKER positions to play the regular game.");
 const tictactoeGame=new TicTacToeGame();
 //Starts the game 
 tictactoeGame.start();
