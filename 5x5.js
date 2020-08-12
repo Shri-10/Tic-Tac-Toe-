@@ -129,7 +129,7 @@ function HumanPlayer(board){
           var k=0;
           // To make the joker appear in random spots
           if (availablePositions.length>10){
-            const occupiedposj=board.positions.filter((p)=>p.innerText==='J');
+            const occupiedposj=board.positions.filter((p)=>p.innerText==='Joker');
             if (occupiedposj.length>0){
             for (i=0;i<occupiedposj.length;i++){
               occupiedposj[i].style.fontSize='70px';
