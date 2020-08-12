@@ -11,6 +11,7 @@ a:hover {
 }
 
 body{
+  background-image: url('white space.jpg');
   text-align: center;
   background-color:#d5f4e6;
   font-family: "Times New Roman", Times, serif;
@@ -42,6 +43,7 @@ p{
   text-decoration:none;
 }
 .category{
+  background-image: url('white space.jpg');
   background-color:#d5f4e6 ;
   width: 800px;
   height: 350px;
@@ -50,7 +52,7 @@ p{
   position: relative;
   left:100px;
   top:-80px;
-  border: 5px solid #618685;
+  border: 5px solid black;
   margin-top: 125px;
   margin-bottom: 125px;
   margin-right: 170px;
