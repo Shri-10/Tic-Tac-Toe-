@@ -13,6 +13,7 @@ a:hover {
 body{
   text-align: center;
   background-color:#d5f4e6;
+  background-image: linear-gradient(to right, yellow, SandyBrown,orange,SandyBrown, yellow);
   font-family: "Times New Roman", Times, serif;
   color: black;
 }
@@ -43,6 +44,7 @@ p{
 }
 .category{
   background-color:#d5f4e6 ;
+  background-image: linear-gradient(to right, yellow, SandyBrown,orange,SandyBrown, yellow);
   width: 800px;
   height: 350px;
   padding: 50px;
