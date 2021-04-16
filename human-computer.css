@@ -30,6 +30,7 @@
 
 body {
   background-color: Cornsilk;
+  background-image: linear-gradient(to right, yellow, SandyBrown,orange,SandyBrown, yellow);
   color: black;
   font-family: "Times New Roman", Times, serif;
   text-align: center;
